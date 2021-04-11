@@ -1,0 +1,25 @@
+{
+  "name": "gh-action-bump-maven-version",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mickem/gh-action-bump-maven-version.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mickem/gh-action-bump-maven-version/issues"
+  },
+  "homepage": "https://github.com/mickem/gh-action-bump-maven-version#readme",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "actions-toolkit": "^2.2.0",
+    "pom-parser": "^1.2.0"
+  }
+}
