@@ -1,5 +1,5 @@
-name: Automated Github Action Version Bump
-description: Automated version bump for npm packages.
+name: Automated Github Action Maven Version Bump
+description: Automated version bump for maven pom.xml.
 runs:
   using: 'node12'
   main: 'action.js'
