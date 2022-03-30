@@ -19,6 +19,10 @@ inputs:
     description: 'Path to version in pom file'
     default: '/project/version'
     required: false
+  version-path:
+    description: 'Override version detection to set specific version'
+    default: ''
+    required: false
   commit-message:
     description: 'Custom commit message for version bump commit'
     default: 'version bump'
