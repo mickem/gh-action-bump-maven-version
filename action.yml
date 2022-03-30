@@ -21,7 +21,11 @@ inputs:
     required: false
   commit-message:
     description: 'Custom commit message for version bump commit'
-    default: 'ci: version bump'
+    default: 'version bump'
+    required: false
+  tag-prefix:
+    description: 'Prefix for version tags'
+    default: ''
     required: false
 outputs:
   tag:
