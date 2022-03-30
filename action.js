@@ -59,10 +59,11 @@ Toolkit.run(async tools => {
         const pomFile = (process.env['INPUT_POM-FILE'] != null) ? process.env['INPUT_POM-FILE'] : 'pom.xml'
         const bumpCommand = (process.env['INPUT_BUMP-COMMAND'] != null) ? process.env['INPUT_BUMP-COMMAND'] : 'mvn org.codehaus.mojo:versions-maven-plugin:set -DnewVersion=@NEW_VERSION@'
         const versionPath = (process.env['INPUT_VERSION-PATH'] != null) ? process.env['INPUT_VERSION-PATH'] : '/project/version'
+        const version = (process.env['INPUT_VERSION'] != null) ? process.env['INPUT_VERSION'] : ''
 
         const pom = await parsePom(pomFile);
         const oldVersion = fetchPath(pom.pomObject, versionPath.split('/').filter(f => f.length > 0));
-        const newVersion = semver.inc(oldVersion, versionCommand);
+        const newVersion = version == '' ? semver.inc(oldVersion, versionCommand) : version;
         if (newVersion === undefined || newVersion === null) {
             tools.exit.failure(`Failed to find new version from ${oldVersion} given ${versionCommand}`);
             return;
