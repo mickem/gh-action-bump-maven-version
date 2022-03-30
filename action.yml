@@ -19,7 +19,7 @@ inputs:
     description: 'Path to version in pom file'
     default: '/project/version'
     required: false
-  version-path:
+  version:
     description: 'Override version detection to set specific version'
     default: ''
     required: false
