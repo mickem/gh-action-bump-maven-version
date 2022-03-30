@@ -42,7 +42,8 @@ function fetchPath(obj, path) {
 Toolkit.run(async tools => {
     const event = tools.context.payload
 
-    const commitMessage = process.env['INPUT_COMMIT-MESSAGE'] || 'ci: version bump'
+    const commitMessage = process.env['INPUT_COMMIT-MESSAGE'] || 'version bump'
+    const tagPrefix = process.env['INPUT_TAG-PREFIX'] || ''
 
     const messages = event.commits ? event.commits.map(commit => commit.message + '\n' + commit.body) : []
     const isVersionBump = messages.map(message => message.toLowerCase().includes(commitMessage)).includes(true)
@@ -81,10 +82,10 @@ Toolkit.run(async tools => {
 
         const remoteRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`
         console.log(Buffer.from(remoteRepo).toString('base64'))
-        await tools.runInWorkspace('git', ['tag', newVersion])
+        await tools.runInWorkspace('git', ['tag', tagPrefix+newVersion])
         await tools.runInWorkspace('git', ['push', remoteRepo])
         await tools.runInWorkspace('git', ['push', remoteRepo, '--tags'])
-        core.setOutput('tag', newVersion)
+        core.setOutput('tag', tagPrefix+newVersion)
         core.setOutput('bumped', true)
     } catch (e) {
         tools.log.fatal(e)
