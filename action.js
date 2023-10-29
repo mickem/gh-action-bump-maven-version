@@ -1,4 +1,3 @@
-const {Toolkit} = require('actions-toolkit')
 const core = require('@actions/core')
 const pomParser = require('pom-parser')
 const semver = require('semver')
@@ -39,7 +38,8 @@ function fetchPath(obj, path) {
     }
     return obj;
 }
-Toolkit.run(async tools => {
+
+async function run() {
     const event = tools.context.payload
 
     const commitMessage = process.env['INPUT_COMMIT-MESSAGE'] || 'version bump'
@@ -93,4 +93,6 @@ Toolkit.run(async tools => {
         tools.exit.failure('Failed to bump version')
     }
     tools.exit.success('Version bumped!')
-})
+}
+
+run()

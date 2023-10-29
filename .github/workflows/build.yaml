@@ -19,15 +19,15 @@ jobs:
     steps:
       - name: Get Version
         id: get_tag
-        run: echo ::set-output name=version::${TAG_REF_NAME##*/}
+        run: echo "version=${TAG_REF_NAME##*/}" >> $GITHUB_OUTPUT
         env:
           TAG_REF_NAME: ${{ github.ref }}
       - name: Release GitHub Actions
         uses: technote-space/release-github-actions@v6
         with:
           BRANCH_NAME: releases/${MAJOR}
-          CLEAN_TARGETS: '.gitignore,.github,*.lock,*.json'
-          COMMIT_MESSAGE: 'build: release ${{ steps.get_tag.outputs.version }} via ${{ github.sha }}'
+          CLEAN_TARGETS: ".gitignore,.github,*.lock,*.json"
+          COMMIT_MESSAGE: "build: release ${{ steps.get_tag.outputs.version }} via ${{ github.sha }}"
 
   testRelease:
     name: Test release
@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Get Version
         id: get_tag
-        run: echo ::set-output name=version::${TAG_REF_NAME##*/}
+        run: echo "version=${TAG_REF_NAME##*/}" >> $GITHUB_OUTPUT
         env:
           TAG_REF_NAME: ${{ github.ref }}
       - name: Release GitHub Actions
@@ -45,5 +45,5 @@ jobs:
         with:
           BRANCH_NAME: releases/${MAJOR}
           TEST_TAG_PREFIX: test/
-          CLEAN_TARGETS: '.gitignore,.github,*.lock,*.json'
-          COMMIT_MESSAGE: 'build: release ${{ steps.get_tag.outputs.version }} via ${{ github.sha }}'
+          CLEAN_TARGETS: ".gitignore,.github,*.lock,*.json"
+          COMMIT_MESSAGE: "build: release ${{ steps.get_tag.outputs.version }} via ${{ github.sha }}"
