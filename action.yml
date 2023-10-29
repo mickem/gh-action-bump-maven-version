@@ -1,7 +1,7 @@
 name: Automated Github Action Maven Version Bump
 description: Automated version bump for maven pom.xml.
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'action.js'
 branding:
   icon: chevron-up
@@ -19,7 +19,7 @@ inputs:
     description: 'Path to version in pom file'
     default: '/project/version'
     required: false
-  version-path:
+  version:
     description: 'Override version detection to set specific version'
     default: ''
     required: false
